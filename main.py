@@ -15,6 +15,7 @@ import re
 from datetime import datetime
 import requests
 from io import StringIO
+from typing import List
 app = FastAPI()
 url = 'https://raw.githubusercontent.com/SantiMartearena/Proyecto-Henry/main/Csv_Proyecto_Terminado.csv'
 
