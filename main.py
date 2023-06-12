@@ -100,12 +100,11 @@ def get_actor(nombre_actor):
     
     return mensaje
 
-@app.get('/get_director/{director}')
+@app.get("/director/{director}")
 def get_director(director: str):
-    df1 = df[df["director"].notna() & df["director"].str.contains(director)]
+    df1 = df[df["director"].notna() &df["director"].str.contains(director)]
     df1["ganancia"] = df1["revenue"] - df1["budget"]
     retorno_director = df1["return"].sum()
     resp = df1[["title", "release_year", "return", "budget", "ganancia"]]
 
     return [director, retorno_director, resp]
-
