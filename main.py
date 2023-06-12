@@ -40,7 +40,7 @@ def cantidad_filmaciones_mes(mes):
 @app.get('/cantidad_filmaciones_dia/{dia}')
 def cantidad_filmaciones_dia(dia):
     dia = dia.lower()
-    filmaciones_dia = df[df["nombre_dia_espanol"].str.lower() == dia]
+    filmaciones_dia = df[df["dia_espanol"].str.lower() == dia]
     cantidad = len(filmaciones_dia)
     
     mensaje = f"{cantidad} cantidad de películas fueron estrenadas en el día {dia.capitalize()}."
