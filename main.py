@@ -16,7 +16,7 @@ from datetime import datetime
 import requests
 from io import StringIO
 app = FastAPI()
-url = 'https://github.com/NicolasTablon/Proyecto_Individual/blob/main/Csv_Proyecto_Terminado.csv'
+url = 'https://github.com/SantiMartearena/Proyecto-Henry/blob/main/Csv_Proyecto_Terminado.csv'
 
 # Descargar el archivo CSV
 response = requests.get(url)
@@ -35,15 +35,17 @@ def cantidad_filmaciones_mes(mes):
     
     return mensaje
 
-@app.get('/cantidad_filmaciones_dia/{dia}')
-def cantidad_filmaciones_dia(dia):
-    cantidad = len(df[df["nombre_dia_espanol"].str.contains(dia, flags=re.IGNORECASE)])
+#Formula para DIAS
+def cantidad_filmaciones_dia(Dia):
+    cantidad = df["dia_espanol"].str.count(Dia, flags=re.IGNORECASE).sum()
     return cantidad
 
-# Supongamos que tienes un DataFrame llamado df con una columna "nombre_dia_espanol" que contiene los días de la semana en español
+# Supongamos que tienes un DataFrame llamado df con una columna "dia_semana" que contiene los días de la semana en español
 dia_consultado = "lunes"  # Por ejemplo, "lunes" es el día que deseas consultar
 cantidad = cantidad_filmaciones_dia(dia_consultado)
 print(f"{cantidad} cantidad de películas fueron estrenadas en los días {dia_consultado}")
+
+
 
 @app.get("/score_titulo/{titulo_de_la_filmacion}")
 def score_titulo(titulo_de_la_filmacion):
