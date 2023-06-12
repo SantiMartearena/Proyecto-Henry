@@ -113,5 +113,31 @@ def get_director(director: str):
         "retorno_director": retorno_director,
         "peliculas": resp.to_dict("records")
     }
+    
+    @app.get('/recomendacion')
+async def recomendacion(titulo: str) -> List[str]:
+    # Convertir el título proporcionado a minúsculas
+    titulo = titulo.lower()
+
+    # Obtener la fila correspondiente al título proporcionado
+    pelicula = df.loc[df['title'].str.lower() == titulo]
+
+    if pelicula.empty:
+        return []
+
+    # Obtener la puntuación de la película
+    puntuacion = pelicula['vote_average'].values[0]
+
+    # Encontrar películas similares según la puntuación
+    peliculas_similares = df.loc[df['vote_average'] >= puntuacion].sort_values('vote_average', ascending=False)
+
+    # Obtener los títulos de las 5 películas con mayor puntuación
+    recomendaciones = peliculas_similares['title'].head(5).tolist()
+
+    return recomendaciones
+
+if _name_ == '_main_':
+    app.run()
+    
 
     return respuesta
