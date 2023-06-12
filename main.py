@@ -114,8 +114,8 @@ def get_director(director: str):
         "retorno_director": retorno_director,
         "peliculas": resp.to_dict("records")
     }
-    
-    @app.get('/recomendacion')
+ 
+@app.get('/recomendacion')
 async def recomendacion(titulo: str) -> List[str]:
     # Convertir el título proporcionado a minúsculas
     titulo = titulo.lower()
