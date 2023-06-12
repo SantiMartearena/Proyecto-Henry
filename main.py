@@ -29,7 +29,7 @@ df = pd.read_csv(io.BytesIO(response.content), error_bad_lines=False)
 @app.get('/cantidad_filmaciones_mes/{mes}')
 def cantidad_filmaciones_mes(mes):
     mes = mes.lower()
-    peliculas_mes = df[df["month"] == mes]
+    peliculas_mes = df[df["release_month"] == mes]
     cantidad = len(peliculas_mes)
     
     mensaje = f"{cantidad} cantidad de películas fueron estrenadas en el mes {mes.capitalize()}."
