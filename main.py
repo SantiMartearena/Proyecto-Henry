@@ -100,11 +100,18 @@ def get_actor(nombre_actor):
     
     return mensaje
 
+# Formula para Director
 @app.get("/director/{director}")
 def get_director(director: str):
-    df1 = df[df["director"].notna() &df["director"].str.contains(director)]
+    df1 = df[df["director"].notna() & df["director"].str.contains(director)]
     df1["ganancia"] = df1["revenue"] - df1["budget"]
     retorno_director = df1["return"].sum()
     resp = df1[["title", "release_year", "return", "budget", "ganancia"]]
 
-    return [director, retorno_director, resp]
+    respuesta = {
+        "director": director,
+        "retorno_director": retorno_director,
+        "peliculas": resp.to_dict("records")
+    }
+
+    return respuesta
