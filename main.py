@@ -36,9 +36,15 @@ def cantidad_filmaciones_mes(mes):
     return mensaje
 
 #Formula para DIAS
+#Prueba
 def cantidad_filmaciones_dia(Dia):
-    cantidad = df["dia_espanol"].str.count(Dia, flags=re.IGNORECASE).sum()
-    return cantidad
+    Dia = Dia.lower()
+    peliculas_dia = df[df["dia_espanol"].str.contains(Dia, flags=re.IGNORECASE)]
+    cantidad = len(peliculas_dia)
+    
+    mensaje = f"{cantidad} cantidad de películas fueron estrenadas en el día {Dia.capitalize()}."
+    
+    return mensaje
 
 # Supongamos que tienes un DataFrame llamado df con una columna "dia_semana" que contiene los días de la semana en español
 dia_consultado = "lunes"  # Por ejemplo, "lunes" es el día que deseas consultar
