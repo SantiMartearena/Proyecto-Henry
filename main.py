@@ -108,5 +108,4 @@ def get_director(director: str):
     resp = df1[["title", "release_year", "return", "budget", "ganancia"]]
 
     return [director, retorno_director, resp]
-df1.loc[:, "ganancia"] = df1["revenue"] - df1["budget"]
 
