@@ -140,5 +140,3 @@ async def recomendacion(titulo: str) -> List[str]:
 if _name_ == '_main_':
     app.run()
     
-
-    return respuesta
